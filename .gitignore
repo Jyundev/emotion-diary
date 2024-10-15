@@ -1,1 +1,23 @@
 .vercel
+
+# Created by https://www.toptal.com/developers/gitignore/api/react
+# Edit at https://www.toptal.com/developers/gitignore?templates=react
+
+### react ###
+.DS_*
+*.log
+logs
+**/*.backup.*
+**/*.back.*
+
+node_modules
+bower_components
+
+*.sublime*
+
+psd
+thumb
+sketch
+
+# End of https://www.toptal.com/developers/gitignore/api/react
+# https://www.toptal.com/developers/gitignore/api/react에 의해 생성됨 # https://www.toptal.com/developers/gitignore?templates=react에서 편집 ### 반응 ### .DS_* *.log 로그 **/*.backup.* **/*.back.* node_modules bower_comComponents *.sublime* psd 썸 스케치 # https://www.toptal.com/developers/gitignore/api/react 끝
