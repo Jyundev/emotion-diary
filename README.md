@@ -64,7 +64,7 @@
      <img src="https://jyundev.github.io/images/2024-10-19-emotion-diary/diary.png" style="width: 30%; height: 40%; margin: 10px">
 </div>
 
-- Home : 일기 리스트 엔더링
+- Home : 일기 리스트 렌더링
 - Diary : 일기 상세 조회
 - New : 새로운 일기 작성
 - Edit : 기존 일기 수정
