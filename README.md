@@ -6,9 +6,9 @@
 
 ## 🖥️ Stack
 
-프론트엔드: React
-데이터베이스: Web Storage (localStorage)
-개발 도구: VSCode, Vite
+- 프론트엔드: React
+- 데이터베이스: Web Storage (localStorage)
+- 개발 도구: VSCode, Vite
 
 ## 📁 프로젝트 구조
 
