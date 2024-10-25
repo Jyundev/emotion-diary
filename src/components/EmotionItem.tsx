@@ -1,18 +1,20 @@
-import { getEmotionImg } from "../util/get-emotion-image";
+import {getEmotionImg} from "../util/get-emotion-image";
 import "./EmotionItem.css";
 
-const EmotionItem = ({
-    emotionId, 
-    emotionName, 
-    isSelected, 
-    onClick}) => {
+type Props = {
+    emotionId: number;
+    emotionName: string;
+    isSelected: boolean;
+    onClick: () => void
+}
+const EmotionItem = (props:Props) => {
     return (
-    <div 
-        onClick={onClick} 
-        className={`EmotionItem ${isSelected? `EmotionItem_on_${emotionId}` : ""}`}>
-        <img className="emotion_img" src={getEmotionImg(emotionId)} />
-        <div className="emotion_name">{emotionName}</div>
-    </div>
+        <div
+            onClick={props.onClick}
+            className={`EmotionItem ${props.isSelected ? `EmotionItem_on_${props.emotionId}` : ""}`}>
+            <img className="emotion_img" src={getEmotionImg(props.emotionId)}/>
+            <div className="emotion_name">{props.emotionName}</div>
+        </div>
     );
 }
 

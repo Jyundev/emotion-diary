@@ -32,7 +32,7 @@
  ┃ ┣ 📜EmotionItem.css
  ┃ ┣ 📜EmotionItem.tsx
  ┃ ┣ 📜Header.css
- ┃ ┣ 📜Header.jsx
+ ┃ ┣ 📜Header.tsx
  ┃ ┣ 📜Viewer.css
  ┃ ┗ 📜Viewer.jsx
  ┣ 📂hooks

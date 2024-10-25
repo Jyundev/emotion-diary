@@ -10,7 +10,8 @@ const Diary = () => {
     usePageTitle("일기장");
     const params = useParams(); // useParam
     const nav = useNavigate();
-    const currentDiaryItem = useDiary(Number(params.id));
+    const currentDiaryItem =params.id?useDiary(params.id):null;
+
     if(!currentDiaryItem){
         return<div>데이터 로딩 중...</div>
     }

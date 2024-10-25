@@ -1,6 +1,5 @@
-import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import {DiaryDispatchContext, useDiaryDispatch} from "../App.js";
+import {useNavigate, useParams} from "react-router-dom";
+import {useDiaryDispatch} from "../App.js";
 import Button from "../components/Button.js";
 import Editor from "../components/Editor.js";
 import Header from "../components/Header";
@@ -15,7 +14,7 @@ const Edit = () => {
     const params = useParams<{ id: string }>();
     const nav = useNavigate();
 
-    const currentDiaryItem  = params.id ? useDiary(params.id) : null;
+    const currentDiaryItem = params.id ? useDiary(params.id) : undefined;
 
     const onClickDelete = () => {
         const diaryId = Number(params.id);
@@ -25,7 +24,7 @@ const Edit = () => {
             return;
         }
 
-        if(window.confirm("일기를 정말 삭제할까요?")){
+        if (window.confirm("일기를 정말 삭제할까요?")) {
             dispatch.onDelete(diaryId);
             nav("/", {replace: true})
         }
@@ -33,22 +32,31 @@ const Edit = () => {
 
     const onSubmit = (input: Partial<DiaryData>) => {
         const diaryId = Number(params.id);
-        if (isNaN(diaryId)) {
+        if (isNaN(diaryId) || !input) {
             window.alert("잘못된 일기 ID입니다.");
             return;
         }
-        if(window.confirm("일기를 정말 수정할가요?")){
-        dispatch.onUpdate(diaryId, input.createdDate, input.emotionId, input.content);
-        nav("/", {replace: true})
+
+        // 각 속성이 유효한지 체크
+        const { createdDate, emotionId, content } = input;
+
+        if (!createdDate || !emotionId || content === undefined) {
+            window.alert("모든 필드를 입력해야 합니다.");
+            return;
+        }
+
+        if (window.confirm("일기를 정말 수정할까요?")) {
+            dispatch.onUpdate(diaryId, createdDate, emotionId, content);
+            nav("/", { replace: true });
         }
     };
 
-return <div>
+    return <div>
         <Header title={"일기 수정하기"}
-        leftChild={<Button onClick={()=>nav(-1)}text={"< 뒤로가기"}/>}
-        rightChild={<Button onClick={onClickDelete} text={"삭제하기"} type={"NEGATIVE"} />}
+                leftChild={<Button onClick={() => nav(-1)} text={"< 뒤로가기"}/>}
+                rightChild={<Button onClick={onClickDelete} text={"삭제하기"} type={"NEGATIVE"}/>}
         />
-        <Editor initData = {currentDiaryItem} onSubmit={onSubmit}/>
+        <Editor initData={currentDiaryItem} onSubmit={onSubmit}/>
     </div>
 }
 

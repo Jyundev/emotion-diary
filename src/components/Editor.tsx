@@ -8,8 +8,8 @@ import EmotionItem from "./EmotionItem";
 import {DiaryData} from "../types";
 
 type Props = {
-    onSubmit: (input:DiaryData)=>void;
-    initData: DiaryData | null ;
+    onSubmit: (input:Partial<DiaryData>)=>void;
+    initData: DiaryData | undefined  ;
 }
 const Editor = (props:Props) => {
 
@@ -61,7 +61,7 @@ const onClickSubmitButton=()=>{
     <div className="Editor">
         <section className="date_section">
             <h4>오늘의 날짜</h4>
-            <input name="createdDate" onChange={onChangeInput} value={getStringDate(input.createdDate)} type="date"/>
+            <input name="createdDate" onChange={onChangeInput} value={input.createdDate ? getStringDate(input.createdDate): ''} type="date"/>
         </section>
         <section className="emotion_section">
             <h4>오늘의 감정</h4>

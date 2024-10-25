@@ -9,7 +9,7 @@ import {DiaryData} from "../types";
 const getMonthlyData = (pivotDate: Date, data: DiaryData[])=>{
     const beginTime = new Date(pivotDate.getFullYear(), pivotDate.getMonth(),1,0,0,0).getTime();
     const endTime = new Date(pivotDate.getFullYear(), pivotDate.getMonth()+1, 0, 23, 59, 59).getTime();
-
+    console.log(data);
     return data.filter((item:DiaryData)=> beginTime <= item.createdDate.getTime() && endTime >= item.createdDate.getTime())
 }
 
