@@ -1,22 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Button from "./Button";
-import DiaryItem from "./DiaryItem";
+import Button from "./Button.js";
+import DiaryItem from "./DiaryItem.js";
 import "./DiaryList.css";
- 
-const DiaryList = ({data}) => {
-    const nav = useNavigate();
-    const [sortType, setSortType] = useState("latest");
+import {DiaryData} from "../types";
 
-    const onChangeSortType = (e) => {
-        setSortType(e.target.value)
+type Props = DiaryData[];
+
+const DiaryList = (props: Props) => {
+    const nav = useNavigate();
+    const [sortType, setSortType] = useState<'oldest' | 'newest'>('newest');
+
+    const onChangeSortType = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSortType(e.target.value as "oldest" | "newest")
     };
     const getSortedData = () => {
-        return data.slice().sort((a, b) => {
+        return props.slice().sort((a:DiaryData, b:DiaryData) => {
             if (sortType === "oldest") {
-                return a.createdDate - b.createdDate;
+                return a.createdDate.getTime() - b.createdDate.getTime();
             } else {
-                return b.createdDate - a.createdDate;
+                return b.createdDate.getTime() - a.createdDate.getTime();
             }
         });
     }

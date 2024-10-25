@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { DiaryDispatchContext } from "../App";
-import Button from "../components/Button";
-import Editor from "../components/Editor";
+import { DiaryDispatchContext } from "../App.js";
+import Button from "../components/Button.js";
+import Editor from "../components/Editor.js";
 import Header from "../components/Header";
-import usePageTitle from "../hooks/usePageTitle";
+import usePageTitle from "../hooks/usePageTitle.js";
 
 const New = () => {
     usePageTitle("새 일기 작성");

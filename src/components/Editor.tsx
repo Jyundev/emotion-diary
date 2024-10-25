@@ -1,45 +1,60 @@
-import { useEffect, useState } from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { emotionList } from "../util/constant";
-import { getStringDate } from "../util/get-string-date";
-import Button from "./Button";
+import { getStringDate } from "../util/get-string-date.js";
+import Button from "./Button.js";
 import "./Editor.css";
 import EmotionItem from "./EmotionItem";
+import {DiaryData} from "../types";
 
-const Editor = ({onSubmit, initData}) => {
+type Props = {
+    onSubmit: (input:DiaryData)=>void;
+    initData: DiaryData | null ;
+}
+const Editor = (props:Props) => {
 
     const nav = useNavigate();
 
     useEffect(()=>{
-        if(initData){
+        if(props.initData){
         setInput({
-            ...initData,
-            createdDate: new Date(Number(initData.createdDate)),
+            ...props.initData,
+            createdDate: props.initData.createdDate,
         })
     };
-    }, [initData])
+    }, [props.initData])
 
-    const [input, setInput] = useState({
+    const [input, setInput] = useState<Partial<DiaryData>>({
     createdDate: new Date(),
     emotionId: 3,
     content: ""
 });
 
 
-const onChangeInput = (e) =>{
+
+    type customEvent = {
+        target :{
+            name : string;
+            value: number;
+        }
+    }
+
+const onChangeInput = (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement> | customEvent) =>{
     let name = e.target.name;
     let value = e.target.value;
+    let date: Date | number;
 
     if(name==="createdDate"){
-        value = new Date(value);
+        date = new Date(value);
+        setInput({...input,
+            [name] : date}
+        );
     }
-    setInput({...input,
-        [name] : value}
-    );
+
 }
 
 const onClickSubmitButton=()=>{
-    onSubmit(input)
+    props.onSubmit(input)
 }
 
     return(

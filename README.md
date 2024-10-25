@@ -22,36 +22,36 @@
  ┃ ┗ 📜emotion5.png
  ┣ 📂components
  ┃ ┣ 📜Button.css
- ┃ ┣ 📜Button.jsx
+ ┃ ┣ 📜Button.tsx
  ┃ ┣ 📜DiaryItem.css
- ┃ ┣ 📜DiaryItem.jsx
+ ┃ ┣ 📜DiaryItem.tsx
  ┃ ┣ 📜DiaryList.css
- ┃ ┣ 📜DiaryList.jsx
+ ┃ ┣ 📜DiaryList.tsx
  ┃ ┣ 📜Editor.css
- ┃ ┣ 📜Editor.jsx
+ ┃ ┣ 📜Editor.tsx
  ┃ ┣ 📜EmotionItem.css
- ┃ ┣ 📜EmotionItem.jsx
+ ┃ ┣ 📜EmotionItem.tsx
  ┃ ┣ 📜Header.css
  ┃ ┣ 📜Header.jsx
  ┃ ┣ 📜Viewer.css
  ┃ ┗ 📜Viewer.jsx
  ┣ 📂hooks
- ┃ ┣ 📜useDiary.jsx
- ┃ ┗ 📜usePageTitle.jsx
+ ┃ ┣ 📜useDiary.tsx
+ ┃ ┗ 📜usePageTitle.tsx
  ┣ 📂pages
- ┃ ┣ 📜Diary.jsx
- ┃ ┣ 📜Edit.jsx
- ┃ ┣ 📜Home.jsx
- ┃ ┣ 📜New.jsx
- ┃ ┗ 📜Notfound.jsx
+ ┃ ┣ 📜Diary.tsx
+ ┃ ┣ 📜Edit.tsx
+ ┃ ┣ 📜Home.tsx
+ ┃ ┣ 📜New.tsx
+ ┃ ┗ 📜Notfound.tsx
  ┣ 📂util
  ┃ ┣ 📜constant.js
  ┃ ┣ 📜get-emotion-image.js
- ┃ ┗ 📜get-string-date.jsx
+ ┃ ┗ 📜get-string-date.tsx
  ┣ 📜App.css
- ┣ 📜App.jsx
+ ┣ 📜App.tsx
  ┣ 📜index.css
- ┗ 📜main.jsx
+ ┗ 📜main.tsx
 
  ```
 

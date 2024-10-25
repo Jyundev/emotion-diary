@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useRef, useState } from "react";
+import React, { useContext, useEffect, useReducer, useRef, useState} from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Diary from "./pages/Diary";
@@ -6,13 +6,37 @@ import Edit from "./pages/Edit";
 import Home from "./pages/Home";
 import New from "./pages/New";
 import Notfound from "./pages/Notfound";
+import {DiaryData} from "./types";
 
 // 1. "/" : 모든 일기를 조회하는 Home 페이지
 // 2. "/new" : 새로운 일기를 작성하는 New 페이지
 // 3. "/diary" : 읽기를 상세히 조회하는 Diary 페이지 
 
+type Action = {
+  type: "CREATE",
+  data: {
+    id: number;
+    createdDate: Date;
+    emotionId: number,
+    content: string;
+  }
+} | {
+  type: "UPDATE",
+  data:{
+    id: number;
+    createdDate: Date;
+    emotionId: number;
+    content: string;
+  }
+} | {
+  type: "DELETE";
+  id: number;
+} |{
+  type: "INIT";
+  data: [];
+}
 
-function reducer(state, action){
+function reducer(state: DiaryData[], action: Action){
   let nextState;
   switch(action.type){
     case "INIT": return action.data;
@@ -31,8 +55,26 @@ function reducer(state, action){
   return nextState;
 }
 
-export const DiaryStateContext = createContext();
-export const DiaryDispatchContext = createContext();
+export const DiaryStateContext = React.createContext<DiaryData[]|null>(null);
+export const DiaryDispatchContext = React.createContext<{
+  onCreate: (createdDate: Date, emotionId: number, content: string) => void;
+  onUpdate: (id: number, createdDate: Date, emotionId: number, content: string) => void;
+  onDelete: (id: number) => void;
+}|null>(null);
+
+// null 값 방지
+export function useDiaryDispatch(){
+  const dispatch = useContext(DiaryDispatchContext);
+  if(!dispatch) throw new Error("DiaryDispatchContext에 문제가 있습니다 ");
+  return dispatch;
+}
+
+export function useDiaryState(){
+  const state = useContext(DiaryStateContext);
+  if(!state) throw new Error("DiaryStateContext 문제가 있습니다 ");
+  return state;
+}
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,16 +88,16 @@ function App() {
       return;
     }
 
-    const parsedData = JSON.parse(storedData);
+    const parsedData: [] = JSON.parse(storedData);
     if(!Array.isArray(parsedData)){
     setIsLoading(false);
       return;
     }
 
     let maxId = 0;
-    parsedData.forEach(element => {
-      if(Number(element.id) > maxId){
-        maxId = Number(element.id);
+    parsedData.forEach((element:DiaryData) => {
+      if(element.id > maxId){
+        maxId =element.id;
       }
     });
 
@@ -69,7 +111,7 @@ function App() {
   }, []);
 
   // 새로운 일기 추가
-  const onCreate = (createdDate, emotionId, content)=> {
+  const onCreate = (createdDate: Date, emotionId: number, content: string)=> {
     dispatch({
       type: "CREATE",
       data: {
@@ -84,7 +126,7 @@ function App() {
   };
 
   // 기존 일기 수정
-  const onUpdate = (id, createdDate, emotionId, content) => {
+  const onUpdate = (id: number, createdDate: Date, emotionId: number, content: string) => {
     dispatch({
       type: "UPDATE",
       data: {
@@ -97,7 +139,7 @@ function App() {
   }
 
   // 기존 일기 삭제
-  const onDelete = (id) => {
+  const onDelete = (id:number) => {
     dispatch({
       type: "DELETE",
       id
